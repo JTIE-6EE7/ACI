@@ -46,7 +46,7 @@
     {{CIDR}}            "Slash" CIDR Notation for Allocated Subnet                 24               
 '''
 
-import csv, sys, getpass, requests
+import csv, sys, jinja2, getpass, requests
 
 # Function to get API auth token from the APIC
 def apic_login(apic):
