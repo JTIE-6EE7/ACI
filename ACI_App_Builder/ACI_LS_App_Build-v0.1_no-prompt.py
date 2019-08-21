@@ -92,18 +92,30 @@ def build_int_payloads(sr_num):
     int_build = f"SR{sr_num}_int.csv"
     int_configs = []
 
+    file_loader = FileSystemLoader('.')
+    # Load the enviroment
+    env = Environment(loader=file_loader)
+    template = env.get_template('JSON/static_ports.j2')
+
     with open(int_build) as build_file:
         # create dictionary from CSV build file
         build_data = csv.DictReader(build_file)
         # insert CSV data into JSON payload via f-strings
         for row in build_data:
-
-            # json nightmare   
-
+            int_cfg_json = template.render(
+                Tenant=row["Tenant"],
+                Alias=row["Alias"],
+                AppID=row["AppID"],
+                Supernet=row["Supernet"],
+                Tier=row["Tier"],
+                Vlan=row["Vlan"],
+                LeafNode=row["LeafNode"],
+                Interface=row["Interface"]
+            )
 
             # add interface config to list of interface configs
             int_configs.append(int_cfg_json)
-            
+            print(int_cfg_json)
         # return list of app_profile configs
         return int_configs
 
@@ -112,14 +124,27 @@ def build_app_payloads(sr_num):
     app_build = f"SR{sr_num}_app.csv"
     app_configs = []
 
+    file_loader = FileSystemLoader('.')
+    # Load the enviroment
+    env = Environment(loader=file_loader)
+    template = env.get_template('JSON/app_profile.j2')
+
     with open(app_build) as build_file:
         # create dictionary from CSV build file
         build_data = csv.DictReader(build_file)
         # insert CSV data into JSON payload via f-strings
         for row in build_data:
-
-            # json nightmare   
-
+            app_profile_json = template.render(
+                Tenant=row["Tenant"],
+                Alias=row["Alias"],
+                AppID=row["AppID"],
+                Supernet=row["Supernet"],
+                Tier=row["Tier"],
+                Vlan=row["Vlan"],
+                Subnet=row["Subnet"],
+                Gateway=row["Gateway"],
+                CIDR=row["CIDR"],
+            )       
 
             # add app_profile config to list of app_profile configs
             app_configs.append(app_profile_json)
@@ -159,7 +184,7 @@ def main():
     # run functions to generate and post interface configs
     int_configs = build_int_payloads(sr_num)
     print("\nInterface configuration results:\n")
-    post_configs(int_configs, apic_url, headers)
+    #post_configs(int_configs, apic_url, headers)
 
     # run function to generate app configs
     app_configs = build_app_payloads(sr_num)
