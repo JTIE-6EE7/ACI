@@ -46,7 +46,7 @@
     {{CIDR}}            "Slash" CIDR Notation for Allocated Subnet                 24               
 '''
 
-import csv, sys, json, getpass, requests
+import csv, sys, getpass, requests
 from jinja2 import Template, Environment, FileSystemLoader
 
 # Function to get API auth token from the APIC
@@ -115,7 +115,7 @@ def build_int_payloads(sr_num):
 
             # add interface config to list of interface configs
             int_configs.append(int_cfg_json)
-            print(int_cfg_json)
+
         # return list of app_profile configs
         return int_configs
 
@@ -148,7 +148,7 @@ def build_app_payloads(sr_num):
 
             # add app_profile config to list of app_profile configs
             app_configs.append(app_profile_json)
-            print(app_profile_json)
+
         # return list of app_profile configs
         return app_configs
 
