@@ -16,14 +16,14 @@
                     {
                         "fvAEPg": {
                             "attributes": {
-                            "name": "APP{{ AppID }}_{{ Tier }}_Vlan{{ {Vlan }}}-EPG"                       
+                            "name": "APP{{ AppID }}_{{ Tier }}_Vlan{{ Vlan }}-EPG"                       
                             },
                             "children": [
                                 {
                                 "fvRsPathAtt": {
                                     "attributes": {
-                                        "dn": "uni/tn-{{ Tenant }}/ap-APP{{ AppID }}_LS_{{ Supernet }}-AP/epg-APP{{ AppID }}_{{ Tier }}_Vlan{{ {Vlan }}}-EPG/rspathAtt-[topology/pod-1/paths-{{ LeafNode }}/pathep-[{{ Interface }]",       
-                                        "encap": "vlan-{{ {Vlan }}",        
+                                        "dn": "uni/tn-{{ Tenant }}/ap-APP{{ AppID }}_LS_{{ Supernet }}-AP/epg-APP{{ AppID }}_{{ Tier }}_Vlan{{ Vlan }}-EPG/rspathAtt-[topology/pod-1/paths-{{ LeafNode }}/pathep-[{{ Interface }}]",       
+                                        "encap": "vlan-{{ Vlan }}",        
                                         "instrImedcy": "immediate",         
                                         "tDn": "topology/pod-1/paths-{{ LeafNode }}/pathep-[{{ Interface }}]"
                                             }

@@ -1,6 +1,6 @@
 #!/usr/local/bin/python3
-
 '''                                                                                                                                           
+
     Low Security Network Build for ACI Deployments - Please review documentation on proper usage!
 
     This script will prompt for: Service Request number, APIC FQDN or IP, Username and RSA Passcode
@@ -46,7 +46,8 @@
     {{CIDR}}            "Slash" CIDR Notation for Allocated Subnet                 24               
 '''
 
-import csv, sys, jinja2, getpass, requests
+import csv, sys, getpass, requests
+from jinja2 import Template, Environment, FileSystemLoader
 
 # Function to get API auth token from the APIC
 def apic_login(apic):
