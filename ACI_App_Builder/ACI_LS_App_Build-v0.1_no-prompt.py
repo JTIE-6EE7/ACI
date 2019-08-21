@@ -140,7 +140,7 @@ def build_int_payloads(sr_num):
     }
             # add interface config to list of interface configs
             int_configs.append(int_cfg_json)
-            
+            print(int_cfg_json)
         # return list of app_profile configs
         return int_configs
 
