@@ -1,31 +1,31 @@
 {
     "fvTenant": {
         "attributes": {
-            "descr": "{{ Tenant }} VRF",
-            "dn": "uni/tn-{{ Tenant }}",
-            "name": "{{ Tenant }}",
-            "nameAlias": "{{ Alias }}"
+            "descr": "Development VRF",
+            "dn": "uni/tn-Development",
+            "name": "Development",
+            "nameAlias": "DEV"
         },
         "children": [
             {
                 "fvAp": {
                 "attributes": {
-                    "name": "APP{{ AppID }}_LS_{{ Supernet }}-AP"
+                    "name": "APP2609_LS_10.100.109.0-AP"
                 },
                 "children": [
                     {
                         "fvAEPg": {
                             "attributes": {
-                            "name": "APP{{ AppID }}_{{ Tier }}_Vlan{{ Vlan }}-EPG"                       
+                            "name": "APP2609_APP_Vlan2693-EPG"                       
                             },
                             "children": [
                                 {
                                 "fvRsPathAtt": {
                                     "attributes": {
-                                        "dn": "uni/tn-{{ Tenant }}/ap-APP{{ AppID }}_LS_{{ Supernet }}-AP/epg-APP{{ AppID }}_{{ Tier }}_Vlan{{ Vlan }}-EPG/rspathAtt-[topology/pod-1/paths-{{ LeafNode }}/pathep-[{{ Interface }}]]",       
-                                        "encap": "vlan-{{ Vlan }}",        
+                                        "dn": "uni/tn-Development/ap-APP2609_LS_10.100.109.0-AP/epg-APP2609_APP_Vlan2693-EPG/rspathAtt-[topology/pod-1/paths-102/pathep-[eth1/4]]",       
+                                        "encap": "vlan-2693",        
                                         "instrImedcy": "immediate",         
-                                        "tDn": "topology/pod-1/paths-{{ LeafNode }}/pathep-[{{ Interface }}]"
+                                        "tDn": "topology/pod-1/paths-102/pathep-[eth1/4]"
                                             }
                                         }
                                     }

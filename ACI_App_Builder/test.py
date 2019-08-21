@@ -31,3 +31,4 @@ with open(int_build) as build_file:
             Interface=row["Interface"]
         )
         int_configs.append(int_cfg_json)
+        print(int_cfg_json)

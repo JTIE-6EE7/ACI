@@ -46,7 +46,7 @@
     {{CIDR}}            "Slash" CIDR Notation for Allocated Subnet                 24               
 '''
 
-import csv, sys, getpass, requests
+import csv, sys, json, getpass, requests
 from jinja2 import Template, Environment, FileSystemLoader
 
 # Function to get API auth token from the APIC
@@ -100,7 +100,7 @@ def build_int_payloads(sr_num):
     with open(int_build) as build_file:
         # create dictionary from CSV build file
         build_data = csv.DictReader(build_file)
-        # insert CSV data into JSON payload via f-strings
+        # render JSON data from jinja2 template
         for row in build_data:
             int_cfg_json = template.render(
                 Tenant=row["Tenant"],
@@ -115,7 +115,7 @@ def build_int_payloads(sr_num):
 
             # add interface config to list of interface configs
             int_configs.append(int_cfg_json)
-            #print(int_cfg_json)
+            
         # return list of app_profile configs
         return int_configs
 
@@ -132,7 +132,7 @@ def build_app_payloads(sr_num):
     with open(app_build) as build_file:
         # create dictionary from CSV build file
         build_data = csv.DictReader(build_file)
-        # insert CSV data into JSON payload via f-strings
+        # render JSON data from jinja2 template
         for row in build_data:
             app_profile_json = template.render(
                 Tenant=row["Tenant"],
@@ -145,7 +145,7 @@ def build_app_payloads(sr_num):
                 Gateway=row["Gateway"],
                 CIDR=row["CIDR"],
             )       
-            print(app_profile_json)
+
             # add app_profile config to list of app_profile configs
             app_configs.append(app_profile_json)
             
@@ -156,12 +156,11 @@ def post_configs(configs, apic_url,headers):
     for index, body in enumerate(configs):
 
         # HTTP response to authtication request    
-        response = requests.request("POST", apic_url, json=body, headers=headers, verify=False)
-
+        response = requests.request("POST", apic_url, data=body, headers=headers, verify=False)
+        
         # print results
         print(f"Row: {index + 1} - Status code: {response.status_code}")
-        
-        response.raise_for_status()
+        #response.raise_for_status()
 
 def main():
     # prompt user for APIC 
@@ -184,12 +183,14 @@ def main():
     # run functions to generate and post interface configs
     int_configs = build_int_payloads(sr_num)
     print("\nInterface configuration results:\n")
-    #post_configs(int_configs, apic_url, headers)
+    post_configs(int_configs, apic_url, headers)
 
     # run function to generate app configs
     app_configs = build_app_payloads(sr_num)
     print("\nApplication Profile configuration results:\n")
     post_configs(app_configs,apic_url,headers)
+    
+    # POST complete
     print("\nScript complete. Verify results above.\n")
     
     return sr_num, apic_url

@@ -60,7 +60,7 @@
                         {
                             "fvRsBdToEpRet": {
                                 "attributes": {
-                                "resolveAct": "resolve"
+                                    "resolveAct": "resolve"
                                 }
                             }
                         },
@@ -70,20 +70,17 @@
                                     "tnL3extOutName": "GOLF-{{ Alias }}-L3-Out"
                                 } 
                             }
-                        }
-                    ]
-                }            
-            },
+                        },
             {
                 "fvAp": {
                     "attributes": {
-                        "name": "APP{{ AppID }}_LS_{{ Supernet }}-AP",
+                        "name": "APP{{ AppID }}_LS_{{ Subnet }}-AP",
                         "prio": "unspecified"
                     },
                     "children": [
                         {
                             "fvAEPg": {
-                                "attributes": {
+                                "attributes": { 
                                 "isAttrBasedEPg": "no",
                                 "matchT": "AtleastOne",                                 
                                 "name": "APP{{ AppID }}_{{ Tier }}_Vlan{{ Vlan }}-EPG",
@@ -130,10 +127,13 @@
                                                 "netflowPref": "disabled",
                                                 "resImedcy": "immediate"
                                             }
-                                        }                             
+                                        }
                                     }
-                                ]
+                                ]                                            
                             }
+                        }
+                    ]
+                }
                         }
                     ]
                 }
