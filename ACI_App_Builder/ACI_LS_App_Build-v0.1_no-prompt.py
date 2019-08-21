@@ -301,7 +301,7 @@ def build_app_payloads(sr_num):
             }
             # add app_profile config to list of app_profile configs
             app_configs.append(app_profile_json)
-            
+            print(app_profile_json)
         # return list of app_profile configs
         return app_configs
 
