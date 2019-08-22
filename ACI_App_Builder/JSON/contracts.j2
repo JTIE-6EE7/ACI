@@ -1,0 +1,62 @@
+# Contract
+{
+    "vzBrCP": {
+        "attributes": {
+            "dn": "uni/tn-{{tn_name}}/brc-{{name}}",
+            "name": "{{name}}",
+            "prio": "unspecified",
+            "scope": "{{scope}}",
+            "status": "{{status}}"
+        },
+        "children": [
+            {
+                "vzSubj": {
+                    "attributes": {
+                        "consMatchT": "AtleastOne",
+                        "name": "{{subject}}",
+                        "prio": "unspecified",
+                        "provMatchT": "AtleastOne",
+                        "revFltPorts": "{{reverse_filter}}",
+                        "rn": "subj-{{subject}}",
+                        "status": "{{status}}"
+                    },
+                    "children": [
+                        {
+                            "vzRsSubjFiltAtt": {
+                                "attributes": {
+                                    "rn": "rssubjFiltAtt-{{filter}}",
+                                    "status": "{{status}}",
+                                    "tnVzFilterName": "{{filter}}"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
+
+# Consume
+{
+    "fvRsCons": {
+        "attributes": {
+            "dn": "uni/tn-{{tn_name}}/ap-{{ap_name}}/epg-{{epg_name}}/rscons-{{contract}}",
+            "prio": "unspecified",
+            "status": "{{status}}",
+            "tnVzBrCPName": "{{contract}}"
+        }
+    }
+}
+
+# Provide
+{
+    "fvRsProv": {
+        "attributes": {
+            "dn": "uni/tn-{{tn_name}}/ap-{{ap_name}}/epg-{{epg_name}}/rsprov-{{contract}}",
+            "prio": "unspecified",
+            "status": "{{status}}",
+            "tnVzBrCPName": "{{contract}}"
+        }
+    }
+}
